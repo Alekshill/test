@@ -20,7 +20,7 @@ LiquidCrystal lcd(12, 11, 10, 5,4, 3, 2);
 void setup() {
   
    Serial.begin(9600); 
-   dht.begin();
+  // dht.begin();
 
    pinMode(buttonPin, INPUT);
    if (!bmp.begin()) {
@@ -29,7 +29,12 @@ void setup() {
    else {
    pinMode (GREEN,OUTPUT);
    }
-   
+   if (!dht.begin()) {
+   lcd.println("Could not find a BMP sensor, check wiring!");
+   }
+   else {
+   pinMode (GREEN,OUTPUT);
+   }   
    lcd.begin(20, 4);
    lcd.print("I like my job"); 
    delay(500);                
@@ -46,7 +51,7 @@ void setup() {
 
 void loop() {
   
-  analogWrite  (GREEN, random(120)+135);
+  analogWrite  (GREEN, 135+random(120));
     
   float h = dht.readHumidity();
   float tC = dht.readTemperature();
