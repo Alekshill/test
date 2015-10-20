@@ -31,7 +31,14 @@ void setup() {
             else {
                   pinMode (GREEN,OUTPUT);
    }
-   
+  
+   if (isnan(h) || isnan(t) || isnan(f)) {
+
+    Serial.println("Failed to read from DHT sensor!");
+
+    return;
+
+  }
    lcd.begin(20, 4);
    lcd.print("I like my job"); 
    delay(500);                
